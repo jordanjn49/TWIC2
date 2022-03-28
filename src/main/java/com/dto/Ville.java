@@ -1,12 +1,31 @@
 package com.dto;
 
+import javax.persistence.*;
 
+@Entity
+@Table
 public class Ville {
 
-    private String Code_commune_INSEE,Code_postal, Latitude,Longitude, Nom_commune, Libelle_acheminement, Ligne_5;
+    @Id
+    @SequenceGenerator(
+            name = "ville_sequence",
+            sequenceName = "ville_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "ville_sequence"
+    )
+
+    private String Code_commune_INSEE;
+    private String Code_postal;
+    private String Latitude;
+    private String Longitude;
+    private String Nom_commune;
+    private String Libelle_acheminement;
+    private String Ligne_5;
 
     public Ville() {
-
     }
 
     public Ville(String Code_commune_INSEE, String Nom_commune, String Code_postal, String Libelle_acheminement, String Ligne_5, String Latitude, String Longitude) {
@@ -73,5 +92,18 @@ public class Ville {
 
     public void setLigne_5(String ligne_5) {
         Ligne_5 = ligne_5;
+    }
+
+    @Override
+    public String toString() {
+        return "Ville{" +
+                "Code_commune_INSEE='" + Code_commune_INSEE + '\'' +
+                ", Code_postal='" + Code_postal + '\'' +
+                ", Latitude='" + Latitude + '\'' +
+                ", Longitude='" + Longitude + '\'' +
+                ", Nom_commune='" + Nom_commune + '\'' +
+                ", Libelle_acheminement='" + Libelle_acheminement + '\'' +
+                ", Ligne_5='" + Ligne_5 + '\'' +
+                '}';
     }
 }
