@@ -21,11 +21,14 @@ public class VilleController {
 	@Autowired
 
 	@GetMapping
-	public List<Ville> get() {
-		return List.of(new Ville("01001", "L ABERGEMENT CLEMENCIAT", "01400", "L ABERGEMENT CLEMENCIAT", "", "46.1331001556", "4.99858455549"),
-				new Ville("01002", "L ABERGEMENT CLEMENCIAT", "01400", "L ABERGEMENT CLEMENCIAT", "", "46.1331001556", "4.99858455549"));
+	public List<Ville> getAllVilles() {
+		return villeService.findAllVilles();
 	}
 
+	@PostMapping
+	public void addNewVille(@RequestBody Ville ville) {
+		villeService.addVille(ville);
+	}
 
 
 
