@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2022.
+ * Writed by Jordan Jouin
+ * Student at ESEO (Angers)
+ */
+
 package com.controller;
 
 import com.blo.VilleBLO;
@@ -30,44 +36,23 @@ public class VilleController {
 		villeService.addVille(ville);
 	}
 
+	@PutMapping(path = "{code_commune_insee}")
+	public void updateVille(
+			@PathVariable("code_commune_insee") String code_commune_insee,
+			@RequestParam(required = false) String Code_postal,
+			@RequestParam(required = false) String Latitude,
+			@RequestParam(required = false) String Longitude,
+			@RequestParam(required = false) String Nom_commune,
+			@RequestParam(required = false) String Libelle_acheminement,
+			@RequestParam(required = false) String Ligne_5)
+			{
+				villeService.updateVille(code_commune_insee, Code_postal, Latitude, Longitude, Nom_commune, Libelle_acheminement, Ligne_5);
 
+	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//	// fonction pour récupérer le contenu de la BDD
-//	@RequestMapping(value="/ville", method=RequestMethod.GET)
-//	@ResponseBody
-//	public ArrayList<Ville> get(@RequestParam(required  = false, value="codePostal") String codePostal) {
-//		System.out.println("get");
-//		ArrayList<Ville> listeVille = villeBLODService.getInfoVilles(codePostal);
-//		return listeVille;
-//	}
-//
-//	// fonction pour récupérer le contenu de la BDD
-//	@RequestMapping(value="/ville", method=RequestMethod.POST)
-//	@ResponseBody
-//	public String insert(@RequestBody Ville ville, Model model) {
-//		//public String insert(@RequestBody String num) {
-//		//System.out.println(num);
-//		System.out.println(ville);
-//		return null;
-//	}
+	@DeleteMapping(path = "{code_commune_insee}")
+	public void deleteVille(@PathVariable("code_commune_insee") String code_commune_insee) {
+		villeService.deleteVille(code_commune_insee);
+	}
 
 }

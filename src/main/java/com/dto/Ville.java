@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2022.
+ * Writed by Jordan Jouin
+ * Student at ESEO (Angers)
+ */
+
 package com.dto;
 
 import javax.persistence.*;
