@@ -6,39 +6,53 @@
 
 package com.controller;
 
-import com.blo.VilleBLO;
+import com.blo.VilleService;
 import com.dto.Ville;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(path="/villes")
+@RequestMapping("/villes")
 public class VilleController {
 
-	private final VilleBLO villeService;
+	private final VilleService villeService;
 
 	@Autowired
-	public VilleController(VilleBLO villeService) {
+	public VilleController(VilleService villeService) {
 		this.villeService = villeService;
 	}
 
-	@Autowired
-
-	@GetMapping
-	public List<Ville> getAllVilles() {
-		return villeService.findAllVilles();
+	@GetMapping(path = "all")
+	public ResponseEntity<List<Ville>> getAllVilles() {
+		List<Ville> villes = villeService.findAllVille();
+		return new ResponseEntity<>(villes, HttpStatus.OK);
 	}
 
-	@PostMapping
-	public void addNewVille(@RequestBody Ville ville) {
-		villeService.addVille(ville);
+	@GetMapping(path = "/find/{id}")
+	public ResponseEntity<Ville> getVilleById(@PathVariable("id") String id) {
+		Ville ville = villeService.findVilleById(id);
+		return new ResponseEntity<>(ville, HttpStatus.OK);
 	}
 
-	@PutMapping(path = "{code_commune_insee}")
+	@GetMapping(path = "/find/{nomCommune}")
+	public ResponseEntity<Ville> getVilleByNomCommune(@PathVariable("nomCommune") String nomCommune) {
+		Ville ville = villeService.findVilleByNomCommune(nomCommune);
+		return new ResponseEntity<>(ville, HttpStatus.OK);
+	}
+
+	@PostMapping(path = "/add")
+	public ResponseEntity<Ville> addVille(@RequestBody Ville ville) {
+		Ville newVille = villeService.addVille(ville);
+		return new ResponseEntity<>(newVille,HttpStatus.CREATED);
+	}
+
+	@PutMapping(path = "/update/{id}")
 	public void updateVille(
-			@PathVariable("code_commune_insee") String code_commune_insee,
+			@PathVariable("id") String code_commune_insee,
 			@RequestParam(required = false) String Code_postal,
 			@RequestParam(required = false) String Latitude,
 			@RequestParam(required = false) String Longitude,
@@ -46,13 +60,13 @@ public class VilleController {
 			@RequestParam(required = false) String Libelle_acheminement,
 			@RequestParam(required = false) String Ligne_5)
 			{
-				villeService.updateVille(code_commune_insee, Code_postal, Latitude, Longitude, Nom_commune, Libelle_acheminement, Ligne_5);
-
+			villeService.updateVille(code_commune_insee, Code_postal, Latitude, Longitude, Nom_commune, Libelle_acheminement, Ligne_5);
 	}
 
-	@DeleteMapping(path = "{code_commune_insee}")
-	public void deleteVille(@PathVariable("code_commune_insee") String code_commune_insee) {
-		villeService.deleteVille(code_commune_insee);
+	@DeleteMapping(path = "/delete/{id}")
+	public ResponseEntity<?> deleteVille(@PathVariable("id") String id) {
+		villeService.deleteVille(id);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 }
