@@ -38,12 +38,6 @@ public class VilleController {
 		return new ResponseEntity<>(ville, HttpStatus.OK);
 	}
 
-	@GetMapping(path = "/find/{nomCommune}")
-	public ResponseEntity<Ville> getVilleByNomCommune(@PathVariable("nomCommune") String nomCommune) {
-		Ville ville = villeService.findVilleByNomCommune(nomCommune);
-		return new ResponseEntity<>(ville, HttpStatus.OK);
-	}
-
 	@PostMapping(path = "/add")
 	public ResponseEntity<Ville> addVille(@RequestBody Ville ville) {
 		Ville newVille = villeService.addVille(ville);

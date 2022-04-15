@@ -14,6 +14,5 @@ import java.util.Optional;
 
 @Repository
 public interface VilleRepository extends JpaRepository<Ville,String> {
-    Optional<Ville> findVilleByNomCommune(String nomCommune);
     Optional<Ville> findVilleById(String id);
 }
