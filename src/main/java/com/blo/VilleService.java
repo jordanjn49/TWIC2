@@ -35,11 +35,6 @@ public class VilleService {
         return villeRepo.findVilleById(id).orElseThrow(() -> new VilleNotFoundException("Ville by id" + id + "not found"));
     }
 
-    public Ville findVilleByNomCommune(String nomCommune) {
-        return villeRepo.findVilleByNomCommune(nomCommune).orElseThrow(() -> new VilleNotFoundException("Ville by name" + nomCommune + "not found"));
-    }
-
-
     public Ville addVille(Ville ville) {
         return villeRepo.save(ville);
     }
