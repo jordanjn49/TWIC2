@@ -40,8 +40,13 @@ public class VilleService {
     }
 
     @Transactional
-    public void updateVille(String code_commune_insee, String Code_postal, String Latitude,
-                            String Longitude, String Nom_commune, String Libelle_acheminement, String Ligne_5) {
+    public void updateVille(String code_commune_insee,
+                            String Code_postal,
+                            String Latitude,
+                            String Longitude,
+                            String Nom_commune,
+                            String Libelle_acheminement,
+                            String Ligne_5) {
         Ville ville = villeRepo.findById(code_commune_insee)
                 .orElseThrow(() -> new IllegalStateException("La ville avec CodeINSEE=" + code_commune_insee + " n'existe pas."));
 
