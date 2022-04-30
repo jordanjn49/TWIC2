@@ -8,6 +8,7 @@ package com.controller;
 
 import com.blo.VilleService;
 import com.dto.Ville;
+import com.exception.VilleNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,22 +27,17 @@ public class VilleController {
 		this.villeService = villeService;
 	}
 
+	//	Working
 	@GetMapping(path = "all")
 	public ResponseEntity<List<Ville>> getAllVilles() {
 		List<Ville> villes = villeService.findAllVille();
 		return new ResponseEntity<>(villes, HttpStatus.OK);
 	}
 
+	//	Working
 	@GetMapping(path = "/find/{id}")
-	public ResponseEntity<Ville> getVilleById(@PathVariable("id") String id) {
-		Ville ville = villeService.findVilleById(id);
-		return new ResponseEntity<>(ville, HttpStatus.OK);
-	}
-
-	@PostMapping(path = "/add")
-	public ResponseEntity<Ville> addVille(@RequestBody Ville ville) {
-		Ville newVille = villeService.addVille(ville);
-		return new ResponseEntity<>(newVille,HttpStatus.CREATED);
+	public Ville getVilleById(@PathVariable String id) {
+		return villeService.findVilleById(id);
 	}
 
 	@PutMapping(path = "/update/{id}")
@@ -57,6 +53,7 @@ public class VilleController {
 			villeService.updateVille(code_commune_insee, Code_postal, Latitude, Longitude, Nom_commune, Libelle_acheminement, Ligne_5);
 	}
 
+	// Working
 	@DeleteMapping(path = "/delete/{id}")
 	public ResponseEntity<?> deleteVille(@PathVariable("id") String id) {
 		villeService.deleteVille(id);

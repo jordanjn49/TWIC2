@@ -35,10 +35,6 @@ public class VilleService {
         return villeRepo.findVilleById(id).orElseThrow(() -> new VilleNotFoundException("Ville by id" + id + "not found"));
     }
 
-    public Ville addVille(Ville ville) {
-        return villeRepo.save(ville);
-    }
-
     @Transactional
     public void updateVille(String code_commune_insee,
                             String Code_postal,
